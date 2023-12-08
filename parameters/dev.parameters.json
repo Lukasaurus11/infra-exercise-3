@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "containerRegistryName": {
+      "value": "lucaccontainerregistry"
+    },
+    "appServicePlanName": {
+      "value": "lucac-appservice-plan"
+    },
+    "webAppName": {
+      "value": "lucac-appservice"
+    },
+    "containerRegistryImageName": {
+      "value": "flask-demo"
+    },
+    "containerRegistryImageVersion": {
+      "value": "latest"
+    },
+    "location": {
+      "value": "Canada Central"
+    }
+  }
+}
