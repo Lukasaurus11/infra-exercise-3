@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "keyVaultName": {
-      "value": "lucac-keyvault1"
+      "value": "lucacb1-keyvault1"
     },
     "location": {
       "value": "Canada Central"
     },
     "acrName": {
-      "value": "lucac1"
+      "value": "lucacb1"
     }
   }
 }

@@ -3,16 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "acrName": {
-      "value": "lucac1"
+      "value": "lucacb1"
     },
     "location": {
       "value": "Canada Central"
     },
     "appServicePlanName": {
-      "value": "lucac-appserviceplan"
+      "value": "lucacb1-appserviceplan"
     },
     "keyVaultName": {
-      "value": "lucac-keyvault1"
+      "value": "lucacb1-keyvault1"
     }
   }
 }

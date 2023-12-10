@@ -9,10 +9,10 @@ on:
 env:
   RESOURCE_GROUP: aguadamillas_students_1
   SUBSCRIPTION_ID: e0b9cada-61bc-4b5a-bd7a-52c606726b3b
-  USER_ALIAS: lucac
+  USER_ALIAS: lucacb1
   KEY_VAULT_SECRET_NAME_ACR_USERNAME: keyVaultSecretNameACRUsername
   KEY_VAULT_SECRET_NAME_ACR_PASSWORD: keyVaultSecretNameACRPassword1
-  KEY_VAULT_NAME: lucac-keyvault1
+  KEY_VAULT_NAME: lucacb1-keyvault1
 
 jobs:
   build:
