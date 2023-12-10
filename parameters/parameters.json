@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "containerRegistryName": {
-      "value": "lucaccontainerregistry"
+      "value": "lucaccontaineregistry"
     },
     "appServicePlanName": {
       "value": "lucac-appservice-plan"
@@ -16,6 +16,9 @@
     },
     "containerRegistryImageVersion": {
       "value": "latest"
+    },
+    "keyVaultName": {
+      "value": "lucac-keyvault"
     },
     "location": {
       "value": "Canada Central"
