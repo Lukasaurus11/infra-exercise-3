@@ -1,28 +1,25 @@
-param containerRegistryName string
+param acrName string 
+param location string 
 param appServicePlanName string
-param webAppName string
-param containerRegistryImageName string
-param containerRegistryImageVersion string
-param location string
-param keyVaultName string
+param webAppName string ='lucac-webapp'
+param containerRegistryImageName string = 'flask-demo'
+param containerRegistryImageVersion string = 'latest'
 
+param keyVaultName string
 param keyVaultSecretNameACRUsername string = 'acr-username'
 param keyVaultSecretNameACRPassword1 string = 'acr-password1'
 
-//key vault reference
 resource keyvault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
  }
 
-
 // Azure Container Registry module
 resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
-  name: containerRegistryName
+  name: acrName
  }
 
-// Azure Service Plan for Linux module
-module servicePlan './ResourceModules-main/modules/web/serverfarm/main.bicep' = {
-  name: appServicePlanName
+module serverfarm './Ressources/ResourceModules-main 3/modules/web/serverfarm/main.bicep' = {
+  name: '${appServicePlanName}-deploy'
   params: {
     name: appServicePlanName
     location: location
@@ -38,10 +35,10 @@ module servicePlan './ResourceModules-main/modules/web/serverfarm/main.bicep' = 
 }
 
 // Azure Web App for Linux containers module
-module webApp './ResourceModules-main/modules/web/site/main.bicep' = {
+module site './Ressources/ResourceModules-main 3/modules/web/site/main.bicep' = {
   name: webAppName
   dependsOn: [
-    servicePlan
+    serverfarm
     acr
     keyvault
   ]
@@ -49,17 +46,16 @@ module webApp './ResourceModules-main/modules/web/site/main.bicep' = {
     name: webAppName
     location: location
     kind: 'app'
-    serverFarmResourceId: servicePlan.outputs.resourceId
+    serverFarmResourceId: serverfarm.outputs.resourceId
     siteConfig: {
-      linuxFxVersion: 'DOCKER|${containerRegistryName}.azurecr.io/${containerRegistryImageName}:${containerRegistryImageVersion}'
+      linuxFxVersion: 'DOCKER|${acrName}.azurecr.io/${containerRegistryImageName}:${containerRegistryImageVersion}'
       appCommandLine: ''
     }
     appSettingsKeyValuePairs: {
       WEBSITES_ENABLE_APP_SERVICE_STORAGE: false
     }
-    dockerRegistryServerUrl: 'https://${containerRegistryName}.azurecr.io'
+    dockerRegistryServerUrl: 'https://${acrName}.azurecr.io'
     dockerRegistryServerUserName: keyvault.getSecret(keyVaultSecretNameACRUsername)
     dockerRegistryServerPassword: keyvault.getSecret(keyVaultSecretNameACRPassword1)
   }
 }
-
